@@ -1,0 +1,31 @@
+name: Stats
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write 
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        
+      - name: Setup Python 
+        uses: actions/setup-python@v5
+        with:
+          python-verson: '3.10'
+          
+      - name: Run script
+        run: python ./Roadmap/stats.py
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: Update stats
+          commit_user_name: Roberson Miranda [ Github Actions ]
+          commit_user_email: robersonwm@gmail.com
+          commit_author: robersonwm
